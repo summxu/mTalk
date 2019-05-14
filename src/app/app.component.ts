@@ -11,6 +11,7 @@ import {
   LocalStorageService,
   selectIsAuthenticated
 } from '@app/core';
+
 import { environment as env } from '@env/environment';
 
 import {
@@ -28,30 +29,35 @@ import {
   animations: [routeAnimations]
 })
 export class AppComponent implements OnInit {
+  userInfo = { nickname: 'mtalk' };
+  // userInfo = this.localStorage.getItem('userInfo')
   isProd = env.production;
   envName = env.envName;
   version = env.versions.app;
   year = new Date().getFullYear();
   logo = require('../assets/logo.png');
-  languages = ['en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he'];
+  languages = ['cn', 'en'];
   navigation = [
-    { link: 'about', label: 'anms.menu.about' },
-    { link: 'features', label: 'anms.menu.features' },
-    { link: 'examples', label: 'anms.menu.examples' }
+    // { link: 'about', label: 'anms.menu.about' },
+    { link: 'chat', label: 'anms.menu.chat' },
+    { link: 'explore', label: 'anms.menu.features' }
+    // { link: 'examples', label: 'anms.menu.examples' }
   ];
   navigationSideMenu = [
-    ...this.navigation,
-    { link: 'settings', label: 'anms.menu.settings' }
+    ...this.navigation
+    // { link: 'settings', label: 'anms.menu.settings' }
   ];
 
+  /* sessionstorage 鉴权 */
+  isAuthenticated: false;
   isAuthenticated$: Observable<boolean>;
   stickyHeader$: Observable<boolean>;
   language$: Observable<string>;
   theme$: Observable<string>;
 
   constructor(
-    private store: Store<AppState>,
-    private storageService: LocalStorageService
+    private localStorage: LocalStorageService,
+    private store: Store<AppState>
   ) {}
 
   private static isIEorEdgeOrSafari() {
@@ -59,7 +65,14 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.storageService.testLocalStorage();
+    this.userInfo = this.localStorage.getItem('userInfo');
+    if (this.userInfo) this.isAuthenticated;
+
+    /* 订阅登陆状态改变 */
+    this.store.pipe(select(selectIsAuthenticated)).subscribe(value => {
+      this.userInfo = this.localStorage.getItem('userInfo');
+    });
+
     if (AppComponent.isIEorEdgeOrSafari()) {
       this.store.dispatch(
         new ActionSettingsChangeAnimationsPageDisabled({
@@ -74,12 +87,10 @@ export class AppComponent implements OnInit {
     this.theme$ = this.store.pipe(select(selectEffectiveTheme));
   }
 
-  onLoginClick() {
-    this.store.dispatch(new ActionAuthLogin());
-  }
-
   onLogoutClick() {
     this.store.dispatch(new ActionAuthLogout());
+    /* 清除store */
+    this.localStorage.removeItem('userInfo');
   }
 
   onLanguageSelect({ value: language }) {

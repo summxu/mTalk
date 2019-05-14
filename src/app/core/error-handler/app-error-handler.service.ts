@@ -19,7 +19,8 @@ export class AppErrorHandler extends ErrorHandler {
       displayMessage += ' See console for details.';
     }
 
-    this.notificationsService.error(displayMessage);
+    /* 取消了错误提示 */
+    // this.notificationsService.error(displayMessage);
 
     super.handleError(error);
   }

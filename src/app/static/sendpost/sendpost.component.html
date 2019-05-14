@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1 rtl class="main-heading form-padding">{{ 'anms.sendpost.title' | translate }}</h1>
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-12 col-lg-8 one-card">
+
+      <mat-card [ngClass]="routeAnimationsElements">
+        <!-- 帖子标题 -->
+        <form [formGroup]="form" (ngSubmit)="submit()">
+          <div class="row item" [ngClass]="routeAnimationsElements">
+            <mat-form-field class="col ">
+              <input matInput placeholder="{{ 'anms.sendpost.placeholder1' | translate }}" required autofocus
+                formControlName="title">
+              <mat-error *ngIf="form.get('title').invalid">
+                {{ 'anms.login.placeholder1' | translate }}
+                {{ 'anms.login.error1' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </form>
+        <!-- 帖子主题 -->
+        <div class="row item" [ngClass]="routeAnimationsElements">
+          <div class="col">
+            <label class="post-main">{{'anms.sendpost.placeholder2' | translate}}</label>
+            <!-- <input matInput placeholder="{{ 'anms.sendpost.placeholder1' | translate }}" required autofocus> -->
+            <quill-editor [(ngModel)]="theme">
+              <!-- <div class="ql-container ql-snow" style="height: 200px;">
+                <div class="ql-editor ql-blank" data-gramm="false" contenteditable="true" data-placeholder="输入内容">
+                  <div><br></div>
+                </div>
+                <div class="ql-clipboard" contenteditable="true" tabindex="-1"></div>
+              </div> -->
+            </quill-editor>
+          </div>
+        </div>
+      </mat-card>
+
+    </div>
+    <div class="col-12 col-lg-4 one-card">
+      <mat-card [ngClass]="routeAnimationsElements">
+        <!-- 按钮 -->
+        <!-- <div class="row buttons justify-content-between isanony">
+          <mat-slide-toggle class="isanony">
+            {{ 'anms.sendpost.isanony' | translate }}
+          </mat-slide-toggle>
+        </div>
+        <div class="row buttons justify-content-between isanony">
+          <label class="tags-label">{{'anms.sendpost.tags' | translate}} </label>
+          <mat-form-field class="example-full-width">
+            <input type="text" placeholder="{{'anms.sendpost.selecttags' | translate}}" aria-label="Number" matInput
+              [formControl]="myControl" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div> -->
+
+        <div class="row buttons justify-content-between">
+          <button mat-raised-button color="primary" [ngClass]="routeAnimationsElements" (click)="submit()">
+            {{ 'anms.sendpost.submit' | translate }}
+          </button>
+
+          <button mat-raised-button color="accent" [ngClass]="routeAnimationsElements" (click)="saveDraft()">
+            {{ 'anms.sendpost.draft' | translate }}
+          </button>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+
+
+</div>

@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- <h1 *ngIf="headline!=null" rtl class="main-heading">{{headline+' '}}{{ 'anms.features.result' | translate }}</h1>
+      <h1 *ngIf="headline==null" rtl class="main-heading">{{ 'anms.features.title' | translate }}</h1> -->
+    </div>
+  </div>
+  <div class="row align-items-end masonry">
+    <!-- 帖子列表 -->
+    <div *ngFor="let post of posts |async" class="col-md-6 col-lg-4 mas-item" [ngClass]="routeAnimationsElements">
+      <mat-card [routerLink]="['/detailpost']" [queryParams]="{id:post._id}" class="posts-card">
+        <mat-card-header>
+          <div [ngStyle]="{'background-image':post.asuser.avatar | avatarPipe}" mat-card-avatar
+            class="posts-header-image"></div>
+          <mat-card-title>{{post.asuser.nickname}}</mat-card-title>
+          <mat-card-subtitle>{{post.asuser.intro}}</mat-card-subtitle>
+        </mat-card-header>
+        <!-- <img mat-card-image [src]="post.asuser.avatar"> -->
+        <mat-card-content class="post-theme" [innerHTML]="post.theme">
+        </mat-card-content>
+        <mat-card-footer>
+          <span
+            class="publish-time">{{ 'anms.features.publish' | translate }}：{{post.meta.createAt |date: "yyyy-MM-dd hh:mm"}}</span>
+          <fa-icon icon="book"></fa-icon>
+        </mat-card-footer>
+      </mat-card>
+    </div>
+  </div>
+  <!-- 帖子按钮,按钮的动画是 fixed 单独使用自定义的动画 -->
+  <div class="post-tool" [ngClass]="routeAnimationsPage">
+    <button mat-fab class="plus" routerLink="/sendpost" routerLinkActive="active">
+      <fa-icon (click)="sendBtn()" icon="plus"></fa-icon>
+    </button>
+    <button mat-fab class="arrow-up" (click)="search()">
+      <fa-icon icon="arrow-up"></fa-icon>
+    </button>
+  </div>
+</div>

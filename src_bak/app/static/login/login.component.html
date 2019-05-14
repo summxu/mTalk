@@ -1,0 +1,71 @@
+<div class="background">
+  <tag-canvas [ngClass]="routeAnimationsPage" [tags]="myTags" [options]="tagOption"></tag-canvas>
+  <div class="gradient">
+    <div class="container">
+      <h1>
+        {{ 'anms.login.title'| translate }}
+      </h1>
+      <div class="login-form" [ngClass]="routeAnimationsElements">
+        <!-- < !-- 登陆表单开始 -->
+        <form [formGroup]="form" (ngSubmit)="submit()">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <mat-card>
+                <div class="row">
+                  <mat-form-field class="col" [ngClass]="routeAnimationsElements">
+                    <input matInput placeholder="{{ 'anms.login.placeholder1' | translate }}"
+                      formControlName="username">
+                    <mat-error *ngIf="form.get('username').invalid">
+                      {{ 'anms.login.placeholder1' | translate }}
+                      {{ 'anms.login.error1' | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="row">
+                  <mat-form-field class="col" [ngClass]="routeAnimationsElements">
+                    <input matInput type="password" placeholder="{{ 'anms.login.placeholder2' | translate }}"
+                      formControlName="password">
+                    <mat-error *ngIf="form.get('password').invalid">
+                      {{ 'anms.login.placeholder2' | translate }}
+                      {{ 'anms.login.error1' | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!-- 验证码 -->
+                <div class="row">
+                  <mat-form-field class="col" [ngClass]="routeAnimationsElements">
+                    <input matInput placeholder="{{ 'anms.login.placeholder3' | translate }}"
+                      formControlName="checkCode" type="text">
+                    <mat-error *ngIf="form.get('checkCode').hasError('required')">
+                      {{ 'anms.login.placeholder3' | translate }}
+                      {{ 'anms.login.error1' | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                  <div class="col" [ngClass]="routeAnimationsElements">
+                    <img class="checkCode" src="/api/checkCode" alt="点击刷新验证码" (click)="refCode()">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <mat-checkbox class="col" formControlName="remember" [ngClass]="routeAnimationsElements">
+                    {{ 'anms.login.remember' | translate }}
+                  </mat-checkbox>
+                </div>
+                <div class="row buttons d-flex justify-content-between pad">
+                  <button mat-raised-button color="primary" [ngClass]="routeAnimationsElements">
+                    {{ 'anms.login.login' | translate }}
+                  </button>
+
+                  <button mat-button color="accent" [ngClass]="routeAnimationsElements" routerLink="/register"
+                    routerLinkActive="active">
+                    {{ 'anms.login.register' | translate }}
+                  </button>
+                </div>
+              </mat-card>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

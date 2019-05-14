@@ -1,0 +1,55 @@
+.container {
+  margin-top: 20px;
+}
+
+.form-padding {
+  padding-left: 15px;
+}
+
+.main-heading {
+  text-transform: uppercase;
+  margin: 0 0 20px 0;
+}
+
+.item {
+  margin: 10px 0 10px 0;
+
+  p {
+    padding: 12px 0 0 20px;
+  }
+}
+
+.buttons {
+  margin: 20px 0px;
+}
+
+.isanony {
+  // float: right;
+  text-align: right;
+}
+
+/*  */
+.post-main {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.one-card {
+  margin-bottom: 20px;
+}
+
+.tags-label {
+  line-height: 64px;
+}
+
+.tag {
+  width: 50px;
+  height: 23px;
+  background-color: skyblue;
+  border-radius: 20px;
+  display: inline-block;
+  color: #fff;
+  padding: 0;
+  text-align: center;
+  cursor: pointer;
+}

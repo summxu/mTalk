@@ -82,6 +82,8 @@ mat-sidenav-container {
       flex: 0 0 auto;
       padding: 0 15px;
       text-align: center;
+      position: relative;
+      z-index: 1;
 
       .row {
         padding: 10px 0;
@@ -180,4 +182,20 @@ mat-sidenav {
   .mat-nav-list {
     padding-top: 0;
   }
+}
+
+/* 搜索框 */
+.wrapper .search,
+mat-sidenav .search {
+  // padding: 0 100px;
+}
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+.post-card img {
+  width: 100% !important;
 }

@@ -12,7 +12,7 @@ import {
 } from '@ngrx/router-store';
 
 import { environment } from '@env/environment';
-
+/* 自定义的服务 */
 import { httpInterceptorProviders } from './http-interceptors';
 import { LocalStorageService } from './local-storage/local-storage.service';
 import { AuthEffects } from './auth/auth.effects';
@@ -24,13 +24,13 @@ import { AppErrorHandler } from './error-handler/app-error-handler.service';
 import { CustomSerializer } from './router/custom-serializer';
 import { NotificationService } from './notifications/notification.service';
 import { GoogleAnalyticsEffects } from './google-analytics/google-analytics.effects';
+import { MtalkHttpService } from './mtalk-http/mtalk-http.service';
 
 @NgModule({
   imports: [
     // angular
     CommonModule,
     HttpClientModule,
-
     // ngrx
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreRouterConnectingModule.forRoot(),
@@ -38,7 +38,7 @@ import { GoogleAnalyticsEffects } from './google-analytics/google-analytics.effe
     environment.production
       ? []
       : StoreDevtoolsModule.instrument({
-          name: 'Angular NgRx Material Starter'
+          name: 'mTalk'
         }),
 
     // 3rd party
@@ -53,6 +53,7 @@ import { GoogleAnalyticsEffects } from './google-analytics/google-analytics.effe
   declarations: [],
   providers: [
     NotificationService,
+    MtalkHttpService,
     LocalStorageService,
     AuthGuardService,
     AnimationsService,

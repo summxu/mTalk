@@ -6,7 +6,7 @@ import { SettingsContainerComponent } from './settings';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'about',
+    redirectTo: 'explore',
     pathMatch: 'full'
   },
   {
@@ -15,12 +15,8 @@ const routes: Routes = [
     data: { title: 'anms.menu.settings' }
   },
   {
-    path: 'examples',
-    loadChildren: 'app/examples/examples.module#ExamplesModule'
-  },
-  {
-    path: '**',
-    redirectTo: 'about'
+    path: 'person',
+    loadChildren: 'app/person/examples.module#ExamplesModule'
   }
 ];
 

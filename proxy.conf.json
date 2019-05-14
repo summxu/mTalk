@@ -1,0 +1,16 @@
+{
+  "/api": {
+    "target": "http://192.168.1.102:1234/api",
+    "secure": false,
+    "pathRewrite": {
+      "^/api": ""
+    }
+  },
+  "/avatar": {
+    "target": "http://192.168.1.102:1234/avatar",
+    "secure": false,
+    "pathRewrite": {
+      "^/avatar": ""
+    }
+  }
+}

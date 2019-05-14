@@ -24,10 +24,13 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSliderModule } from '@angular/material/';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
+import { TagCanvasModule } from 'ng-tagcanvas';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
+// 图标支持
 import {
+  faHeart,
   faBars,
   faUserCircle,
   faPowerOff,
@@ -50,17 +53,25 @@ import {
   faLightbulb,
   faWindowMaximize,
   faStream,
-  faBook
+  faBook,
+  faHome,
+  faArrowUp,
+  faThumbsUp
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faGithub,
   faMediumM,
   faTwitter,
   faInstagram,
-  faYoutube
+  faYoutube,
+  faWeibo
 } from '@fortawesome/free-brands-svg-icons';
 
+/* 添加到图标库 */
 library.add(
+  faWeibo,
+  faThumbsUp,
+  faHeart,
   faBars,
   faUserCircle,
   faPowerOff,
@@ -88,7 +99,9 @@ library.add(
   faLightbulb,
   faWindowMaximize,
   faStream,
-  faBook
+  faBook,
+  faHome,
+  faArrowUp
 );
 
 import { BigInputComponent } from './big-input/big-input.component';
@@ -119,8 +132,8 @@ import { RtlSupportDirective } from './rtl-support/rtl-support.directive';
     MatSnackBarModule,
     MatSlideToggleModule,
     MatDividerModule,
-
-    FontAwesomeModule
+    FontAwesomeModule,
+    TagCanvasModule
   ],
   declarations: [
     BigInputComponent,
@@ -156,6 +169,7 @@ import { RtlSupportDirective } from './rtl-support/rtl-support.directive';
     MatNativeDateModule,
 
     FontAwesomeModule,
+    TagCanvasModule,
 
     BigInputComponent,
     BigInputActionComponent,
