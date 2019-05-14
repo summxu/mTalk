@@ -42,23 +42,26 @@
     <div class="col-12 col-lg-4 one-card">
       <mat-card [ngClass]="routeAnimationsElements">
         <!-- 按钮 -->
-        <!-- <div class="row buttons justify-content-between isanony">
-          <mat-slide-toggle class="isanony">
-            {{ 'anms.sendpost.isanony' | translate }}
-          </mat-slide-toggle>
+        <div class="row">
+          <!-- 标签列表 -->
+          <div class="tag" *ngFor="let item of tags">{{item}}</div>
         </div>
+
         <div class="row buttons justify-content-between isanony">
           <label class="tags-label">{{'anms.sendpost.tags' | translate}} </label>
           <mat-form-field class="example-full-width">
             <input type="text" placeholder="{{'anms.sendpost.selecttags' | translate}}" aria-label="Number" matInput
-              [formControl]="myControl" [matAutocomplete]="auto">
+              [(ngModel)]="tag" [matAutocomplete]="auto">
             <mat-autocomplete #auto="matAutocomplete">
               <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                 {{option}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
-        </div> -->
+          <button mat-button [ngClass]="routeAnimationsElements" (click)="addTags()">
+            添加标签
+          </button>
+        </div>
 
         <div class="row buttons justify-content-between">
           <button mat-raised-button color="primary" [ngClass]="routeAnimationsElements" (click)="submit()">

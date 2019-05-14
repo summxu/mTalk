@@ -127,8 +127,8 @@ export class SendpostComponent implements OnInit {
   }
 
   addTags() {
-    if (this.tag == undefined) return false;
-    this.tags.push(this.tag);
-    this.tag = '';
-  }
+          if(this.tag == undefined || this.tag = '' ) return false;
+      this.tags.push(this.tag); 
+      this.tag = ''
+    } 
 }
