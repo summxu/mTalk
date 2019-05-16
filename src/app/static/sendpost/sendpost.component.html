@@ -1,7 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <h1 rtl class="main-heading form-padding">{{ 'anms.sendpost.title' | translate }}</h1>
+      <h1 [ngClass]="routeAnimationsElements" rtl class="main-heading form-padding">
+        {{ 'anms.sendpost.title' | translate }}</h1>
     </div>
   </div>
   <div class="row ">
@@ -50,24 +51,23 @@
         <div class="row buttons justify-content-between isanony">
           <label class="tags-label">{{'anms.sendpost.tags' | translate}} </label>
           <mat-form-field class="example-full-width">
-            <input type="text" placeholder="{{'anms.sendpost.selecttags' | translate}}" aria-label="Number" matInput
-              [(ngModel)]="tag" [matAutocomplete]="auto">
+            <input type="text" (keyup.enter)="addTags()" placeholder="{{'anms.sendpost.selecttags' | translate}}"
+              aria-label="Number" matInput [(ngModel)]="tag" [matAutocomplete]="auto">
             <mat-autocomplete #auto="matAutocomplete">
               <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                 {{option}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
-          <button mat-button [ngClass]="routeAnimationsElements" (click)="addTags()">
-            添加标签
-          </button>
         </div>
 
         <div class="row buttons justify-content-between">
           <button mat-raised-button color="primary" [ngClass]="routeAnimationsElements" (click)="submit()">
             {{ 'anms.sendpost.submit' | translate }}
           </button>
-
+          <button mat-raised-button color="success" [ngClass]="routeAnimationsElements" (click)="addTags()">
+            {{ 'anms.sendpost.addtags' | translate }}
+          </button>
           <button mat-raised-button color="accent" [ngClass]="routeAnimationsElements" (click)="saveDraft()">
             {{ 'anms.sendpost.draft' | translate }}
           </button>
@@ -75,6 +75,4 @@
       </mat-card>
     </div>
   </div>
-
-
 </div>

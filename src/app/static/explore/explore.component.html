@@ -7,16 +7,17 @@
         {{ 'anms.features.title' | translate }}</h1>
     </div>
   </div>
-  <div class="row align-items-end masonry">
+  <div class="row align-items-end masonry " [ngClass]="routeAnimationsElements">
     <!-- 帖子列表 -->
-    <div *ngFor="let post of posts" class="col-md-6 col-lg-4 mas-item">
-      <mat-card [routerLink]="['/detailpost']" [queryParams]="{id:post._id}" class="posts-card"
-        [ngClass]="routeAnimationsElements">
+    <div *ngFor="let post of posts" class="col-md-6 col-lg-4 mas-item route-animations-elements">
+      <mat-card [routerLink]="['/detailpost']" [queryParams]="{id:post._id}" class=" posts-card">
         <mat-card-header>
           <div [ngStyle]="{'background-image':post.asuser.avatar | avatarPipe}" mat-card-avatar
             class="posts-header-image"></div>
-          <mat-card-title>{{post.asuser.nickname}}</mat-card-title>
-          <mat-card-subtitle>{{post.asuser.intro}}</mat-card-subtitle>
+          <mat-card-title class="gundongBox">
+            <span class="gundong">{{post.title}}</span>
+          </mat-card-title>
+          <mat-card-subtitle>{{post.asuser.nickname}}</mat-card-subtitle>
         </mat-card-header>
         <!-- <img mat-card-image [src]="post.asuser.avatar"> -->
         <mat-card-content class="post-theme" [innerHTML]="post.theme">
@@ -30,12 +31,12 @@
     </div>
   </div>
   <!-- 帖子按钮,按钮的动画是 fixed 单独使用自定义的动画 -->
-  <div class="post-tool" [ngClass]="routeAnimationsPage">
-    <button mat-fab class="plus" routerLink="/sendpost" routerLinkActive="active">
+  <div class="post-tool">
+    <button mat-fab class="plus" routerLink="/sendpost">
       <fa-icon (click)="sendBtn()" icon="plus"></fa-icon>
     </button>
     <button mat-fab class="arrow-up" (click)="search()">
-      <fa-icon icon="arrow-up"></fa-icon>
+      <fa-icon icon="search"></fa-icon>
     </button>
   </div>
 </div>

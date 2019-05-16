@@ -8,7 +8,7 @@ import { State as BaseSettingsState } from '@app/settings';
 
 import { State as BaseExamplesState } from '../examples.state';
 
-interface State extends BaseSettingsState, BaseExamplesState {}
+interface State extends BaseSettingsState, BaseExamplesState { }
 
 @Component({
   selector: 'anms-examples',
@@ -21,14 +21,16 @@ export class ExamplesComponent implements OnInit {
   isAdmin = false;
   examples = [
     { link: 'info', label: 'anms.person.menu.info' },
+    { link: 'settings', label: 'anms.examples.menu.settings' },
     { link: 'stock-market', label: 'anms.examples.menu.stocks', auth: true },
-    { link: 'theming', label: 'anms.examples.menu.theming', auth: true }
+    { link: 'theming', label: 'anms.examples.menu.theming', auth: true },
+    { link: 'form', label: 'anms.examples.menu.site', auth: true }
   ];
 
   constructor(
     private store: Store<State>,
     private local: LocalStorageService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (this.local.getItem('userInfo').role) {

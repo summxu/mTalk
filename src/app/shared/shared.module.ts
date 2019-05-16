@@ -55,6 +55,7 @@ import {
   faStream,
   faBook,
   faHome,
+  faSearch,
   faArrowUp,
   faThumbsUp
 } from '@fortawesome/free-solid-svg-icons';
@@ -101,6 +102,7 @@ library.add(
   faStream,
   faBook,
   faHome,
+  faSearch,
   faArrowUp
 );
 
@@ -176,4 +178,4 @@ import { RtlSupportDirective } from './rtl-support/rtl-support.directive';
     RtlSupportDirective
   ]
 })
-export class SharedModule {}
+export class SharedModule { }

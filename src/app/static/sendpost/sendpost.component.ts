@@ -39,11 +39,11 @@ export class SendpostComponent implements OnInit {
     private localStorage: LocalStorageService,
     private store: Store<AppState>,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     /* 获取草稿箱 */
-    if (this.localStorage.getItem('userInfo').draft) {
+    if (this.localStorage.getItem('userInfo')) {
       this.form.setValue({
         title: JSON.parse(this.localStorage.getItem('userInfo').draft).title
       });
@@ -67,6 +67,12 @@ export class SendpostComponent implements OnInit {
 
   /* 保存草稿 */
   saveDraft() {
+    /* 检测站点聊天状态 */
+    this.mtalkHttpService.getSite().subscribe(value => {
+      if (value.data[0].sendposts) {
+        this.notificationService.error('本站点禁止发帖！')
+      }
+    })
     /* 验证通过之后 */
     if (this.theme == '' || this.form.value.title == '') {
       this.notificationService.error('主题内容和标题不能为空');
@@ -108,7 +114,8 @@ export class SendpostComponent implements OnInit {
       var data = {
         title: this.form.value.title,
         accessToken: this.localStorage.getItem('userInfo').accessToken,
-        theme: this.theme
+        theme: this.theme,
+        tags: JSON.stringify(this.tags)
       };
       this.mtalkHttpService.sendpost(data).subscribe(
         value => {
@@ -120,15 +127,22 @@ export class SendpostComponent implements OnInit {
           }
         },
         error => {
-          this.notificationService.error('登录失败,请检查网络连接');
+          this.notificationService.error('请求失败,请检查网络连接');
         }
       );
     }
   }
 
   addTags() {
-          if(this.tag == undefined || this.tag = '' ) return false;
-      this.tags.push(this.tag); 
-      this.tag = ''
-    } 
+    if (this.tag == undefined || this.tag == '') {
+      return false
+    }
+    for (let index = 0; index < this.tags.length; index++) {
+      const element = this.tags[index];
+      if (this.tag == element) return false
+
+    }
+    this.tags.push(this.tag)
+    this.tag = ''
+  }
 }

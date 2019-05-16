@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row align-items-end masonry">
     <!-- 帖子列表 -->
-    <div *ngFor="let item of posts" class="col-md-6 col-lg-4 mas-item">
-      <mat-card class="posts-card">
+    <div [ngClass]="routeAnimationsElements" *ngFor="let item of posts" class="col-md-6 col-lg-4 mas-item">
+      <mat-card [ngClass]="routeAnimationsElements" class="posts-card">
         <mat-card-header>
           <mat-card-title>{{item.title}}</mat-card-title>
         </mat-card-header>

@@ -2,8 +2,8 @@
 
   <div class="row align-items-end masonry">
     <!-- 帖子列表 -->
-    <div *ngFor="let item of users" class="col-md-6 col-lg-4 mas-item">
-      <mat-card class="posts-card">
+    <div [ngClass]="routeAnimationsElements" *ngFor="let item of users" class="col-md-6 col-lg-4 mas-item">
+      <mat-card [ngClass]="routeAnimationsElements" class="posts-card">
         <mat-card-header>
           <img class="avatar" [src]="item.avatar" alt="">
           <mat-card-title>{{item.nickname}}</mat-card-title>

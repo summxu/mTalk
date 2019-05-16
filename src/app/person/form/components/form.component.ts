@@ -1,3 +1,4 @@
+import { MtalkHttpService } from './../../../core/mtalk-http/mtalk-http.service';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
@@ -15,28 +16,19 @@ import { Form } from '../form.model';
 @Component({
   selector: 'anms-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
+  siteId: string;
 
   form = this.fb.group({
-    autosave: false,
-    username: ['', [Validators.required]],
-    password: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    description: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(1000)
-      ]
-    ],
-    requestGift: [''],
-    birthday: ['', [Validators.required]],
-    rating: [0, Validators.required]
+    open: false,
+    sendposts: false,
+    isreg: false,
+    login: false,
+    chat: false,
+    talks: ['', [Validators.required]]
   });
 
   formValueChanges$: Observable<Form>;
@@ -45,47 +37,35 @@ export class FormComponent implements OnInit {
     private fb: FormBuilder,
     private store: Store<State>,
     private translate: TranslateService,
-    private notificationService: NotificationService
-  ) {}
+    private notificationService: NotificationService,
+    private mtalkHttp: MtalkHttpService
+  ) { }
 
   ngOnInit() {
-    this.formValueChanges$ = this.form.valueChanges.pipe(
-      debounceTime(500),
-      filter((form: Form) => form.autosave)
-    );
-    this.store
-      .pipe(
-        select(selectFormState),
-        take(1)
-      )
-      .subscribe(form => this.form.patchValue(form.form));
-  }
-
-  update(form: Form) {
-    this.store.dispatch(new ActionFormUpdate({ form }));
-  }
-
-  save() {
-    this.store.dispatch(new ActionFormUpdate({ form: this.form.value }));
+    /* 检测站点状态 */
+    this.mtalkHttp.getSite().subscribe(value => {
+      console.log(value)
+      this.siteId = value.data[0]._id
+      let form = {
+        open: value.data[0].open,
+        sendposts: value.data[0].sendposts,
+        isreg: value.data[0].isreg,
+        login: value.data[0].login,
+        chat: value.data[0].chat,
+        talks: value.data[0].talks
+      }
+      console.log(form)
+      this.form.setValue(form)
+    })
   }
 
   submit() {
     if (this.form.valid) {
-      this.save();
-      this.notificationService.info(
-        (this.form.value.requestGift
-          ? this.translate.instant('anms.examples.form.text4')
-          : this.translate.instant('anms.examples.form.text5')) +
-          ' : ' +
-          this.translate.instant('anms.examples.form.text6')
-      );
+      let data = this.form.value
+      data._id = this.siteId
+      this.mtalkHttp.updateSite(data).subscribe(value => {
+        console.log(value)
+      })
     }
-  }
-
-  reset() {
-    this.form.reset();
-    this.form.clearValidators();
-    this.form.clearAsyncValidators();
-    this.store.dispatch(new ActionFormReset());
   }
 }

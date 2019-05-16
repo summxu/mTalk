@@ -8,7 +8,7 @@ import {
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { LocalStorageService } from '@app/core/local-storage/local-storage.service';
-import { NotificationService } from '@app/core';
+import { NotificationService, ROUTE_ANIMATIONS_ELEMENTS, ROUTE_ANIMATIONS_PAGE } from '@app/core';
 
 @Component({
   selector: 'anms-stock-market',
@@ -17,13 +17,15 @@ import { NotificationService } from '@app/core';
 })
 export class StockMarketContainerComponent implements OnInit {
   users = [];
+  routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
+  routeAnimationsPage = ROUTE_ANIMATIONS_PAGE;
 
   constructor(
     private mTalkHttpService: MtalkHttpService,
     private localStorageService: LocalStorageService,
     private notificationService: NotificationService,
     private ngZone: NgZone
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getUsers();

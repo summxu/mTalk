@@ -23,9 +23,12 @@ import { AuthenticatedComponent } from './authenticated/authenticated.component'
 import { NotificationsComponent } from './notifications/components/notifications.component';
 import { ExamplesEffects } from './examples.effects';
 import { InfoComponent } from './info/info.component';
+import { SettingsModule } from '../settings';
+
 
 @NgModule({
   imports: [
+    SettingsModule,
     SharedModule,
     ExamplesRoutingModule,
     StoreModule.forFeature(FEATURE_NAME, reducers),
@@ -58,7 +61,7 @@ import { InfoComponent } from './info/info.component';
   providers: []
 })
 export class ExamplesModule {
-  constructor() {}
+  constructor() { }
 }
 
 export function HttpLoaderFactory(http: HttpClient) {

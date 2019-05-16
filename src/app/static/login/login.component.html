@@ -1,5 +1,6 @@
 <div class="background">
-  <tag-canvas [ngClass]="routeAnimationsPage" [tags]="myTags" [options]="tagOption"></tag-canvas>
+  <tag-canvas *ngIf="tagState" [ngClass]="routeAnimationsPage" [tags]="myTags" [options]="tagOption">
+  </tag-canvas>
   <div class="gradient">
     <div class="container">
       <h1 [ngClass]="routeAnimationsElements">

@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class MtalkHttpService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   /**
    * CheckCode检查验证码
@@ -75,13 +75,28 @@ export class MtalkHttpService {
     return this.http.post(`/api/p/deletepost`, body);
   }
 
-  /* 获取话 */
-  getTalks(): Observable<any> {
-    return this.http.get('/api/s/talks');
-  }
-
   /* 搜索 */
   searchPost(body: any): Observable<any> {
     return this.http.post('/api/p/search', body);
   }
+  /* 标签查询 */
+  tagPost(body: any): Observable<any> {
+    return this.http.post('/api/p/tagPost', body);
+  }
+
+  /* 获取话 */
+  getSite(): Observable<any> {
+    return this.http.get('/api/s/siteInit');
+  }
+
+  /* 更新站点信息 */
+  updateSite(body: any): Observable<any> {
+    return this.http.post('/api/s/updateSite', body);
+  }
+
+  /* 插入标签 */
+  newTag(body: any): Observable<any> {
+    return this.http.post('/api/t/newtags', body);
+  }
+
 }

@@ -21,8 +21,7 @@ import { MtalkHttpService } from '@app/core/mtalk-http/mtalk-http.service';
 @Component({
   selector: 'anms-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
   code = `/api/checkCode`;
@@ -30,21 +29,9 @@ export class RegisterComponent implements OnInit {
   routeAnimationsPage = ROUTE_ANIMATIONS_PAGE;
 
   /* tag控制 */
-  myTags = [
-    { text: '语言和文字的起源！' },
-    { text: '你吃饭了吗？' },
-    { text: '中国男生找不到对象看来不是没有原因的' },
-    { text: '是因为夏天来了吗' },
-    { text: '说三个字 打动我了当你女朋友！' },
-    { text: '灵魂早万里挑一 就怕没得挑。' },
-    { text: '大家好我是来钓鱼的有自己上钩的吗？' },
-    { text: '许多年以前看过，有资源的发一个？' },
-    { text: '老哥们，闲鱼上这些人你们怎么看' },
-    { text: '90后无矿自己创业经历，一起见证' },
-    { text: '舔狗是没有好结果的' },
-    { text: '这？？？怎么感觉跟微商似的' },
-    { text: '我这个吨位配有对象么' }
-  ];
+  myTags = [];
+  tagState = false;
+  isreg = false;
   tagOption = {
     dragControl: false,
     weight: true,
@@ -76,20 +63,26 @@ export class RegisterComponent implements OnInit {
     private notificationService: NotificationService,
     private mtalkHttpService: MtalkHttpService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
-    // this.formValueChanges$ = this.form.valueChanges.pipe(
-    //   debounceTime(500),
-    //   filter((form: Form) => form.autosave)
-    // );
+    this.mtalkHttpService.getSite().subscribe(value => {
+      this.myTags = JSON.parse(value.data[0].talks)
+      this.isreg = value.data[0].isreg
+      console.log(this.myTags)
+      setInterval(time => {
+        this.tagState = true
+      }, 0)
+    })
   }
 
   submit() {
-    // if (this.form.get('password') != this.form.get('repassword')) {
-    //   this.notificationService.error('两次密码不一致！')
-    //   return false
-    // }
+    /* 判断是否允许注册 */
+    if (this.isreg) {
+      this.notificationService.error('本站点禁止注册！')
+      return false
+    }
+
     if (this.form.valid) {
       // this.save();
       this.mtalkHttpService.register(this.form.value).subscribe(

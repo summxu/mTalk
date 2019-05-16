@@ -37,7 +37,7 @@ const routes: Routes = [
   {
     path: 'chat',
     component: ChatComponent,
-    data: { title: 'anms.menu.detailpost' }
+    data: { title: 'anms.menu.chat' }
   }
 ];
 
@@ -45,4 +45,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class StaticRoutingModule {}
+export class StaticRoutingModule { }

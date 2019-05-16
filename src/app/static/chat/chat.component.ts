@@ -1,3 +1,4 @@
+import { MtalkHttpService } from './../../core/mtalk-http/mtalk-http.service';
 import { Router } from '@angular/router';
 import { LocalStorageService, NotificationService } from '@app/core';
 import {
@@ -60,10 +61,17 @@ export class ChatComponent implements OnInit, AfterViewInit {
     public dialog: MatDialog,
     private localStorage: LocalStorageService,
     private notificationService: NotificationService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private mtalkHttp: MtalkHttpService
+  ) { }
 
   ngOnInit() {
+    /* 检测站点聊天状态 */
+    this.mtalkHttp.getSite().subscribe(value => {
+      if (value.data[0].chat) {
+        this.notificationService.error('本站点禁止聊天！')
+      }
+    })
     /* 检测用户登陆状态 */
     if (this.localStorage.getItem('userInfo') == null) {
       this.notificationService.error('用户未登录，请登陆后重试');
@@ -89,7 +97,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
   private scrollToBottom(): void {
     try {
       this.matList.nativeElement.scrollTop = this.matList.nativeElement.scrollHeight;
-    } catch (err) {}
+    } catch (err) { }
   }
 
   private initModel(): void {

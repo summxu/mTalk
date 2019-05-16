@@ -39,7 +39,7 @@
 }
 
 .posts-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  // background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
 }
 
@@ -98,4 +98,24 @@ mat-card-actions {
   height: 35px;
   border-radius: 50%;
   float: left;
+}
+
+
+.tag {
+  // width: 50px;]
+  padding: 0px 6px;
+  height: 23px;
+  background-color: skyblue;
+  border-radius: 20px;
+  display: inline-block;
+  color: #fff;
+  // padding: 0;
+  text-align: center;
+  cursor: pointer;
+  margin: 2px;
+}
+
+// 不生效
+mat-card.one-card.mat-card img {
+  max-width: 100%;
 }

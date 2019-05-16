@@ -1,8 +1,16 @@
 {
   "/api": {
-    "target": "http://localhost:1234/api"
+    "target": "http://localhost:1234/api",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
   },
   "/avatar": {
-    "target": "http:localhost:1234/avatar"
+    "target": "http://localhost:1234/avatar",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/avatar": ""
+    }
   }
 }

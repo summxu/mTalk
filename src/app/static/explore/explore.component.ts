@@ -10,6 +10,7 @@ import { Feature, features } from './features.data';
 import { MtalkHttpService } from '@app/core/mtalk-http/mtalk-http.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DialogSearchComponent } from './search-dialog/dialog-user.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export interface DialogData {
   searchData: string;
@@ -27,19 +28,31 @@ export class ExploreComponent implements OnInit {
   // posts = [{ asuser: '123123', title: 'qweqeqwewqe', theme: 'hsjadhkajhdkhaskjd' }];
   searchData: string;
   headline: string;
-
-  public posts = [];
+  tag: string;
+  public posts: any[];
   constructor(
     private mtalkHttpService: MtalkHttpService,
     private notificationService: NotificationService,
-    public dialog: MatDialog
-  ) {}
+    public dialog: MatDialog,
+    private routeInfo: ActivatedRoute,
+  ) { }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() { }
   ngOnInit() {
-    this.getPosts();
+    this.tag = this.routeInfo.snapshot.queryParams['tag'];
+    if (this.tag) {
+      this.getTagPost()
+    } else {
+      this.getPosts();
+    }
   }
-
+  getTagPost() {
+    this.mtalkHttpService.tagPost({ tag: this.tag }).subscribe(value => {
+      console.log(value)
+      this.posts = value.data;
+      this.headline = `#${this.tag}#`;
+    })
+  }
   getPosts() {
     this.mtalkHttpService.getPosts().subscribe(value => {
       this.posts = value;

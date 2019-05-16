@@ -12,6 +12,7 @@ import { StockMarketContainerComponent } from './stock-market/components/stock-m
 import { CrudComponent } from './crud/components/crud.component';
 import { FormComponent } from './form/components/form.component';
 import { NotificationsComponent } from './notifications/components/notifications.component';
+import { SettingsContainerComponent } from '../settings';
 
 const routes: Routes = [
   {
@@ -39,9 +40,9 @@ const routes: Routes = [
         data: { title: 'anms.examples.menu.theming' }
       },
       {
-        path: 'crud',
-        redirectTo: 'crud/',
-        pathMatch: 'full'
+        path: 'settings',
+        component: SettingsContainerComponent,
+        data: { title: 'anms.examples.menu.settings' }
       },
       {
         path: 'crud/:id',
@@ -51,12 +52,12 @@ const routes: Routes = [
       {
         path: 'form',
         component: FormComponent,
-        data: { title: 'anms.examples.menu.form' }
+        data: { title: 'anms.examples.menu.site' }
       },
       {
         path: 'info',
         component: InfoComponent,
-        data: { title: 'anms.examples.menu.form' }
+        data: { title: 'anms.person.menu.info' }
       },
       {
         path: 'notifications',
@@ -77,4 +78,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ExamplesRoutingModule {}
+export class ExamplesRoutingModule { }

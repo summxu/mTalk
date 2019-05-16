@@ -7,14 +7,24 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+  <link href="assets/css/icon.css" rel="stylesheet">
   <link href="assets/css/quill.snow.css" rel="stylesheet">
+
   <link rel="icon" type="image/png" href="./assets/logo.png">
   <style type="text/css">
     body,
     html {
       height: 100%;
+    }
+
+    /* 两个图片不生效的就在这里吧 */
+    mat-card.one-card.mat-card.route-animations-elements img {
+      max-width: 100%;
+    }
+
+    mat-card.posts-card.mat-card img {
+      width: 100%;
     }
 
     .app-loading {
@@ -87,7 +97,7 @@
         (i[r].q = i[r].q || []).push(arguments)
       }, i[r].l = 1 * new Date(); a = s.createElement(o),
         m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    })(window, document, 'script', 'assets/js/analytics.js', 'ga');
 
     ga('create', 'UA-53234284-5', 'auto');
   </script>

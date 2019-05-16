@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MtalkHttpService } from '@app/core/mtalk-http/mtalk-http.service';
 import { NotificationService } from '@app/core/notifications/notification.service';
+import { ROUTE_ANIMATIONS_ELEMENTS } from '@app/core';
 
 @Component({
   selector: 'anms-detailpost',
@@ -14,11 +15,13 @@ import { NotificationService } from '@app/core/notifications/notification.servic
   styleUrls: ['./detailpost.component.scss']
 })
 export class DetailpostComponent implements OnInit {
+  routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
   myControl = new FormControl();
-  commits: any[] = [];
+  commits: any[];
 
+  tags = []
   private postInfo: Object;
   private postId: string;
 
@@ -34,7 +37,7 @@ export class DetailpostComponent implements OnInit {
     private localStorage: LocalStorageService,
     private localStorageService: LocalStorageService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     /* 获取路由id */
@@ -43,7 +46,7 @@ export class DetailpostComponent implements OnInit {
       value => {
         if (value.success === true) {
           this.postInfo = value.data;
-          console.log(this.postInfo);
+          this.tags = value.data.tags
         } else {
           this.notificationService.error('请求失败,未知原因');
         }

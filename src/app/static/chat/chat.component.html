@@ -21,13 +21,18 @@
         </p>
       </mat-list-item>
     </mat-list>
-    <div class="chat-footer-container">
+    <div class="chat-footer-container" [ngClass]="routeAnimationsElements">
       <mat-icon>message</mat-icon>
       <mat-form-field class="chat-input">
         <input matInput #inputMessage maxlength="140" placeholder="键入消息" [(ngModel)]="messageContent"
           (keyup.enter)="sendMessage(messageContent)">
         <mat-hint align="end">{{inputMessage.value.length}}/140</mat-hint>
+
       </mat-form-field>
+      <button class="chat-btn" mat-button color="success" [ngClass]="routeAnimationsElements"
+        (click)="sendMessage(messageContent)">
+        发送
+      </button>
     </div>
   </mat-card>
 </div>

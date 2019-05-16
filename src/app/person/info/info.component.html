@@ -1,41 +1,39 @@
 <div class="container" rtl>
-
-
   <div class="row ">
     <div class="col-md-6">
-      <mat-card>
+      <mat-card [ngClass]="routeAnimationsElements">
         <form [formGroup]="formInfo" (ngSubmit)="updateUser()">
-          <span class="d-flex justify-content-between align-items-baseline">
+          <span [ngClass]="routeAnimationsElements" class="d-flex justify-content-between align-items-baseline">
             <h2>基本信息</h2>
           </span>
-          <div class=" info-row">
+          <div [ngClass]="routeAnimationsElements" class=" info-row">
             <label class="info-title">头像：</label>
             <img class="avatar" [src]="photo" alt="">
           </div>
-          <div class=" info-row">
+          <div [ngClass]="routeAnimationsElements" class=" info-row">
             <label class="info-title">用户名：</label>
             <input formControlName="username" disabled>
           </div>
-          <div class=" ">
+          <div [ngClass]="routeAnimationsElements" class=" ">
             <label class="info-title ">昵称：</label>
             <mat-form-field>
               <input formControlName="nickname" matInput>
             </mat-form-field>
           </div>
-          <div class=" ">
+          <div [ngClass]="routeAnimationsElements" class=" ">
             <label class="info-title ">个性签名：</label>
             <mat-form-field>
               <input formControlName="intro" matInput>
             </mat-form-field>
           </div>
-          <div class=" ">
+          <div [ngClass]="routeAnimationsElements" class=" ">
             <label class="info-title ">邮箱：</label>
             <mat-form-field>
               <input formControlName="email" matInput>
             </mat-form-field>
           </div>
 
-          <div class=" info-row">
+          <div [ngClass]="routeAnimationsElements" class=" info-row">
             <label class="info-title ">注册时间：</label>
             <input formControlName="createAt" disabled>
 
@@ -49,30 +47,30 @@
       </mat-card>
     </div>
     <div class="col-md-6">
-      <mat-card>
+      <mat-card [ngClass]="routeAnimationsElements">
         <form [formGroup]="formPass" (ngSubmit)="updatePass()">
-          <span class="d-flex justify-content-between align-items-baseline">
+          <span [ngClass]="routeAnimationsElements" class="d-flex justify-content-between align-items-baseline">
             <h2>密码修改</h2>
           </span>
-          <div class=" ">
+          <div [ngClass]="routeAnimationsElements" class=" ">
             <label class="info-title ">原密码：</label>
             <mat-form-field>
               <input type="password" formControlName="oldpass" matInput>
             </mat-form-field>
           </div>
-          <div class=" ">
+          <div [ngClass]="routeAnimationsElements" class=" ">
             <label class="info-title ">新密码：</label>
             <mat-form-field>
               <input type="password" formControlName="password" matInput>
             </mat-form-field>
           </div>
-          <div class=" ">
+          <div [ngClass]="routeAnimationsElements" class=" ">
             <label class="info-title ">确认新密码：</label>
             <mat-form-field>
               <input type="password" formControlName="repass" matInput>
             </mat-form-field>
           </div>
-          <div class="row buttons d-flex justify-content-between pad">
+          <div [ngClass]="routeAnimationsElements" class="row buttons d-flex justify-content-between pad">
             <button type="submit" mat-raised-button color="accent">
               {{ 'anms.examples.form.save' | translate }}
             </button>
