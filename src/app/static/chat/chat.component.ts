@@ -70,6 +70,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
     this.mtalkHttp.getSite().subscribe(value => {
       if (value.data[0].chat) {
         this.notificationService.error('本站点禁止聊天！')
+        this.router.navigateByUrl(`/explore`);
       }
     })
     /* 检测用户登陆状态 */

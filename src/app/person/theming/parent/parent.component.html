@@ -4,7 +4,8 @@
     <div [ngClass]="routeAnimationsElements" *ngFor="let item of posts" class="col-md-6 col-lg-4 mas-item">
       <mat-card [ngClass]="routeAnimationsElements" class="posts-card">
         <mat-card-header>
-          <mat-card-title>{{item.title}}</mat-card-title>
+          <mat-card-title class="post-title" [routerLink]="['/detailpost']" [queryParams]="{id:item._id}">{{item.title}}
+          </mat-card-title>
         </mat-card-header>
 
         <mat-card-footer class="row buttons d-flex justify-content-between pad">

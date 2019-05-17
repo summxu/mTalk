@@ -14,13 +14,9 @@ export const ROUTE_ANIMATIONS_PAGE = 'route-animations-page';
 
 const STEPS_ALL: any[] = [
   /* 这里还是有问题。 */
-  query(
-    ':enter .route-animations-page, :enter > *',
-    [style({ opacity: 0, position: 'fixed' })],
-    {
-      optional: true
-    }
-  ),
+  query(':enter .route-animations-page, :enter > *', [style({ opacity: 0, position: 'fixed' })], {
+    optional: true
+  }),
   query(':enter .' + ROUTE_ANIMATIONS_ELEMENTS, style({ opacity: 0 }), {
     optional: true
   }),

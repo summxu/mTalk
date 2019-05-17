@@ -99,4 +99,9 @@ export class MtalkHttpService {
     return this.http.post('/api/t/newtags', body);
   }
 
+  /* huoqubiaoqian  */
+  getTags(): Observable<any> {
+    return this.http.get('/api/t/tags');
+  }
+
 }

@@ -14,14 +14,13 @@ import { selectIsAuthenticated, ActionAuthLogin, AppState } from '@app/core';
 @Component({
   selector: 'anms-sendpost',
   templateUrl: './sendpost.component.html',
-  styleUrls: ['./sendpost.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./sendpost.component.scss']
 })
 export class SendpostComponent implements OnInit {
   /* 标签列表 */
   tags = [];
   tag: string;
-  options: string[] = ['One', 'Two', 'Three'];
+  options: string[] = [];
 
   filteredOptions: Observable<string[]>;
   myControl = new FormControl();
@@ -51,11 +50,10 @@ export class SendpostComponent implements OnInit {
         this.localStorage.getItem('userInfo').draft
       ).theme;
     }
+    /* 获取标签 */
+    this.getTags()
 
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    );
+
   }
 
   private _filter(value: string): string[] {
@@ -110,6 +108,9 @@ export class SendpostComponent implements OnInit {
       this.router.navigateByUrl(`/login`);
       return false;
     }
+    /* 发送标签 */
+    this.sendTags()
+
     if (this.form.valid) {
       var data = {
         title: this.form.value.title,
@@ -131,6 +132,26 @@ export class SendpostComponent implements OnInit {
         }
       );
     }
+  }
+
+  /* 获取标签 */
+  getTags() {
+    this.mtalkHttpService.getTags().subscribe(value => {
+      value.data.forEach(element => {
+        this.options.push(element.name)
+      });
+      /* 标签属性过滤 */
+      this.filteredOptions = this.myControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+    })
+  }
+
+  sendTags() {
+    this.mtalkHttpService.newTag({ tags: JSON.stringify(this.tags) }).subscribe(value => {
+      console.log(value)
+    })
   }
 
   addTags() {
