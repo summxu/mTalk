@@ -21,7 +21,7 @@ export class ParentComponent implements OnInit {
     private mTalkHttpService: MtalkHttpService,
     private localStorageService: LocalStorageService,
     private notificationService: NotificationService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getPosts();
@@ -36,6 +36,7 @@ export class ParentComponent implements OnInit {
 
   /* dongjie  */
   delPost(id) {
+    console.log(id)
     this.mTalkHttpService.delPost({ _id: id }).subscribe(value => {
       if (value.success) {
         this.posts.splice(this.posts.findIndex(v => v._id == id), 1);

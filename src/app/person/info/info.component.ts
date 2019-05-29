@@ -44,19 +44,20 @@ export class InfoComponent implements OnInit {
     private translate: TranslateService,
     private notificationService: NotificationService,
     private localStorageService: LocalStorageService
-  ) {}
+  ) { }
 
   ngOnInit() {
     // console.log(this.localStorageService.getItem('userInfo'));
     this.photo = this.localStorageService.getItem('userInfo').avatar;
     const createDate = this.localStorageService.getItem('userInfo').meta
       .createAt as Date;
+    const formart = new Date(createDate)
     this.formInfo.setValue({
       username: this.localStorageService.getItem('userInfo').username,
       nickname: this.localStorageService.getItem('userInfo').nickname,
       intro: this.localStorageService.getItem('userInfo').intro,
       email: this.localStorageService.getItem('userInfo').email,
-      createAt: createDate
+      createAt: `${formart.getFullYear()}.${formart.getMonth() + 1}.${formart.getDay()}`
     });
   }
 

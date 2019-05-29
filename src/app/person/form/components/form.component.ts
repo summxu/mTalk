@@ -64,7 +64,7 @@ export class FormComponent implements OnInit {
       let data = this.form.value
       data._id = this.siteId
       this.mtalkHttp.updateSite(data).subscribe(value => {
-        console.log(value)
+        this.notificationService.success('站点信息更新成功！')
       })
     }
   }

@@ -118,6 +118,11 @@ export class DetailpostComponent implements OnInit {
 
   /* 点赞 */
   start(id) {
+    if (this.localStorage.getItem('userInfo') == null) {
+      this.notificationService.error('用户未登录，请登陆后重试');
+      this.router.navigateByUrl(`/login`);
+      return false;
+    }
     for (let index = 0; index < this.commits.length; index++) {
       const element = this.commits[index];
       if (element._id == id) {

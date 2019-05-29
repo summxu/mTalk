@@ -25,7 +25,6 @@ export class ExploreComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   routeAnimationsPage = ROUTE_ANIMATIONS_PAGE;
   features: Feature[] = features;
-  // posts = [{ asuser: '123123', title: 'qweqeqwewqe', theme: 'hsjadhkajhdkhaskjd' }];
   searchData: string;
   headline: string;
   tag: string;

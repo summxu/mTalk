@@ -6,10 +6,7 @@ import { AuthGuardService } from '@app/core';
 
 import { ExamplesComponent } from './examples/examples.component';
 import { ParentComponent } from './theming/parent/parent.component';
-import { AuthenticatedComponent } from './authenticated/authenticated.component';
-import { TodosContainerComponent } from './todos/components/todos-container.component';
 import { StockMarketContainerComponent } from './stock-market/components/stock-market-container.component';
-import { CrudComponent } from './crud/components/crud.component';
 import { FormComponent } from './form/components/form.component';
 import { NotificationsComponent } from './notifications/components/notifications.component';
 import { SettingsContainerComponent } from '../settings';
@@ -23,11 +20,6 @@ const routes: Routes = [
         path: '',
         redirectTo: 'info',
         pathMatch: 'full'
-      },
-      {
-        path: 'todos',
-        component: TodosContainerComponent,
-        data: { title: 'anms.examples.menu.todos' }
       },
       {
         path: 'stock-market',
@@ -45,11 +37,6 @@ const routes: Routes = [
         data: { title: 'anms.examples.menu.settings' }
       },
       {
-        path: 'crud/:id',
-        component: CrudComponent,
-        data: { title: 'anms.examples.menu.crud' }
-      },
-      {
         path: 'form',
         component: FormComponent,
         data: { title: 'anms.examples.menu.site' }
@@ -63,12 +50,6 @@ const routes: Routes = [
         path: 'notifications',
         component: NotificationsComponent,
         data: { title: 'anms.examples.menu.notifications' }
-      },
-      {
-        path: 'authenticated',
-        component: AuthenticatedComponent,
-        canActivate: [AuthGuardService],
-        data: { title: 'anms.examples.menu.auth' }
       }
     ]
   }

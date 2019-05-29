@@ -38,14 +38,11 @@ export class AppComponent implements OnInit {
   logo = require('../assets/logo.png');
   languages = ['cn', 'en'];
   navigation = [
-    // { link: 'about', label: 'anms.menu.about' },
     { link: 'chat', label: 'anms.menu.chat' },
     { link: 'explore', label: 'anms.menu.features' }
-    // { link: 'examples', label: 'anms.menu.examples' }
   ];
   navigationSideMenu = [
     ...this.navigation
-    // { link: 'settings', label: 'anms.menu.settings' }
   ];
 
   /* sessionstorage 鉴权 */

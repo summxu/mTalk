@@ -1,27 +1,19 @@
 import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
 import { AppState } from '@app/core';
 
-import { todosReducer } from './todos/todos.reducer';
-import { TodosState } from './todos/todos.model';
-import { bookReducer } from './crud/books.reducer';
 import { formReducer } from './form/form.reducer';
 import { FormState } from './form/form.model';
-import { Book, BookState } from './crud/books.model';
 
 export const FEATURE_NAME = 'examples';
 export const selectExamples = createFeatureSelector<State, ExamplesState>(
   FEATURE_NAME
 );
 export const reducers: ActionReducerMap<ExamplesState> = {
-  todos: todosReducer,
-  books: bookReducer,
   form: formReducer
 };
 
 export interface ExamplesState {
-  todos: TodosState;
   form: FormState;
-  books: BookState;
 }
 
 export interface State extends AppState {

@@ -48,10 +48,8 @@ export class ChatComponent implements OnInit, AfterViewInit {
     }
   };
 
-  // getting a reference to the overall list, which is the parent container of the list items
   @ViewChild(MatList, { read: ElementRef }) matList: ElementRef;
 
-  // getting a reference to the items/messages within the list
   @ViewChildren(MatListItem, { read: ElementRef }) matListItems: QueryList<
     MatListItem
   >;
@@ -80,10 +78,6 @@ export class ChatComponent implements OnInit, AfterViewInit {
       return false;
     }
     this.initModel();
-    // Using timeout due to https://github.com/angular/angular/issues/14748
-    // setTimeout(() => {
-    //   this.openUserPopup(this.defaultDialogUserParams);
-    // }, 0);
   }
 
   ngAfterViewInit(): void {
@@ -93,8 +87,6 @@ export class ChatComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // auto-scroll fix: inspired by this stack overflow post
-  // https://stackoverflow.com/questions/35232731/angular2-scroll-to-bottom-chat-style
   private scrollToBottom(): void {
     try {
       this.matList.nativeElement.scrollTop = this.matList.nativeElement.scrollHeight;

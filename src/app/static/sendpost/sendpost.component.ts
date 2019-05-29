@@ -42,7 +42,7 @@ export class SendpostComponent implements OnInit {
 
   ngOnInit() {
     /* 获取草稿箱 */
-    if (this.localStorage.getItem('userInfo')) {
+    if (this.localStorage.getItem('userInfo').draft) {
       this.form.setValue({
         title: JSON.parse(this.localStorage.getItem('userInfo').draft).title
       });
